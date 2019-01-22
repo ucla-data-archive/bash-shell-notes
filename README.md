@@ -1,2 +1,4 @@
 # bash-shell-notes
-lecture notes for swc shell
+
+Lecture notes for swc shell to be taught as part of DSC's workshops. 
+

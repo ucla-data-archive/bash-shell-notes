@@ -1,10 +1,10 @@
 ---
-title: UCLA Software Carpentry Unix Instructor Crib Sheet
-date: Mar. 2018
+title: Intro to Bash Shell
+date: Jan. 22, 2019
 author: Tim Dennis
 ---
 
-# UCLA SWC
+# UCLA Data Science Center - Intro to Shell
 
 ## Before class:
 

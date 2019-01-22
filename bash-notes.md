@@ -19,14 +19,10 @@ author: Tim Dennis
 - students check software installation: Unix, git (with XCode)
 
 - Get the etherpad link
-
-- Have ppl git clone
-
-**Intro to Software Carpentry:** <http://swcarpentry.github.io/slideshows/introducing-software-carpentry/index.html#slide-0>
+- Have ppl `git clone` if they know `git`
 
 ## Checklist for class:
 
-- class website: <https://ucla-data-archive.github.io/2018-04-07-ucla-eeb/>
 - review of pre-class survey
 - mixed audience, both novice/experienced and disciplines
 - if material is review for you, help by keeping notes on etherpad and helping your neighbor
@@ -34,33 +30,34 @@ author: Tim Dennis
 
 ## Setup
 
-- most tasks in the shell can be done with mouse on Desktop. Why do anything differently?
-- motivation
+- Most tasks in the shell can be done with mouse on Desktop. Why do anything differently?
+- **Motivation**
 - Unix = old school system, created before most in this room were born
-- combining powerful tools together using minimal keystrokes
-- automating repetitive tasks: moving files
-- required to use high performance computing systems, supercomputers, often cloud computing
-- terms: file, directory/folder
-- get data
+- Combining powerful tools together using minimal keystrokes
+- Automating repetitive tasks: moving files
+- Required to use high performance computing systems, supercomputers, cloud computing
+- Terms: file, directory/folder
+
+## Get data
 - <http://swcarpentry.github.io/shell-novice/shell-novice-data.zip>, move to Desktop, double click to unzip (if not already done)
 
 ## Introducing the Shell
 
 **Objectives:** orient to shell and how it relates to the computer, understand the benefit of CLI
 
-- what computers do:
+### What computers do:
 
   1. run programs
   2. store data
   3. communicate with each other
   4. communicate with us → today you'll learn a new way of doing this
 
-- terms:
+### terms:
 
   - graphical user interface: _GUI_
   - command line interface: _CLI_
 
-- how it works -- the Read Evaluate Print Loop (REPL):
+### how it works -- the Read Evaluate Print Loop (REPL):
 
   - you type something - LOOP
   - computer reads it - READ

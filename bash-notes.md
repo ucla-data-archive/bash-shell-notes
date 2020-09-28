@@ -80,27 +80,19 @@ author: Tim Dennis
     5. write up results and submit by end of month
 
   - if she enters all commands by hand, will need to do **45,150 times**.
-
   - What can she do instead?
-
 - Key terms in Etherpad/Whiteboard
-
 - _Shell_
-
 - _CLI_ & _GUI_
-
 - Benefits of the CLI
-
   - Automate repetitive tasks (**30 minutes** vs. **2 weeks**)
   - Prevent user error, manual error
   - Processing pipelnes are re-usable and sharable
-
 - _REPL_ Read-Evaluate-Print-Loop
 
 ## Files and Directories
 
 **Objectives:** paths, learn basic commands for working with files and directories, learn syntax of commands, tab-completion
-
 - prompt: `$` indicates computer is ready to accept commands
 
 ```bash
@@ -113,7 +105,6 @@ This command:
 2. runs program
 3. displays program's output
 4. displays new prompt
-
 5. `pwd` print working directory, in this case it is also the home directory
 
 ```bash
@@ -127,7 +118,6 @@ Look at directory structure image
 - root directory: holds everything else, begins with slash `/`
 - structure of directories: nested
 - slashes `\` can also be a separator between names
-
 - `ls` listing, prints names of files and directories in current directory and prints in alphabetical order
 
 ```bash
@@ -235,16 +225,11 @@ pwd
 
 - two more short cuts: `~` and `-`
 - file organization:
-
   - `ls north-pacific-gyre/2012-07-03/`
   - tab completion
-
 - challenges: open <http://swcarpentry.github.io/shell-novice/02-filedir/#absolute-vs-relative-paths>
-
 - _prompt_
-
 - _pwd_, _ls_, _cd_
-
 - _File systems_
 
 # CREATING THINGS
@@ -373,13 +358,9 @@ ls quotes.txt thesis/quotations.txt
 ```
 
 - challenges: open <http://swcarpentry.github.io/shell-novice/03-create/#renaming-files>
-
 - _mkdir_
-
 - _nano_ _(editor)_
-
-- _rm_, _rmdir_
-
+- _rm_, _rmdir
 - _mv_, _cp_
 
 ## Pipes and Filters

@@ -1,10 +1,13 @@
 ---
 title: Intro to Bash Shell
-date: Jan. 22, 2019
+date: April 2021
 author: Tim Dennis
 ---
 
 # UCLA Data Science Center - Intro to Shell
+
+[![hackmd-github-sync-badge](https://hackmd.io/5oziF2v5TuiTcS1I3kCe3Q/badge)](https://hackmd.io/5oziF2v5TuiTcS1I3kCe3Q)
+
 
 ## Before class:
 
@@ -463,25 +466,38 @@ sort -n lengths.txt > sorted-lengths.txt
 head -1 sorted-lengths.txt
 ```
 
-- final result: which one file is shortest?
+### Piping 
 
-```bash
-sort -n lengths.txt | head -1
+- Saving intermediate files like `sorted-lengths.txt` can get messy and confusing
+- We can make it easier to understand by combining these commands together
+
+```bash=pipe
+sort -n lengths.txt | head -n 1
 ```
 
-- **vertical bar** is a pipe, which sends output of command on left as input to command on right
+- **vertical bar** is the pipe in unix 
+- it sends output of command on left as input to command on right
 - `head` prints specified number of lines from top of file
+- we can chain multiple commands together 
+- for example send the output of `wc` directly to `sort`, and then the resulting output to `head`
 
-```bash
-wc -l *.pdb | sort -n | head -1
+```bash=pipe
+wc -l *.pdb | sort -n
+```
+* adding `head` the full pipeline becomes:
+
+```bash=full
+$ wc -l *.pdb | sort -n | head -n 1
 ```
 
-**programming model: pipes and filters**
-
+* this pipe and filter programming model is important conceptually
 - note: you only enter the original files once!
-- standard input, standard output
+- let's review what we covered via this image: 
 
-## Nelle's pipeline:
+![](http://swcarpentry.github.io/shell-novice/fig/redirects-and-pipes.svg)
+
+
+### Nelle's pipeline (skip for time):
 
 - start in her home directory (`users/Nelle`)
 
@@ -534,7 +550,7 @@ cp basilisk.dat unicorn.dat original-*.dat
 
 - problem is that when copy receives two files it expects the last one to be a directory in which to copy the files
 - you can perform these operations using a loop
-- example looking at first three lines in each file
+- first, let's looking at first three lines in each file
 
 ```bash
 for filename in basilisk.dat unicorn.dat
@@ -560,8 +576,8 @@ for filename in *.dat
 
 - use of wildcard. what does echo do? why is this useful for loops?
 - write a for loop to resolve the original problem of creating a backup (copy of original data)
-- strategy: `echo` command before running final, to make sure loop is functioning the way you expect
-- going back to the original file copying problem, we can solve:
+- strategy: `echo` command before running to make sure the loop is functioning the way you expect
+- going back to the original file copying problem, we can solve this with the following loop:
 
 ```bash
 for filename in *.dat
@@ -569,6 +585,7 @@ do
   cp $filename original-$filename
 done
 ```
+### Nelle's example (skip for time contraints)
 
 - nelle's example:
 

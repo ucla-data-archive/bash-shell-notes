@@ -9,34 +9,32 @@ author: Tim Dennis
 ## Before class:
 
 - set up shell:
-
   - `exec bash` - switches to bash from zsh
+      - no longer needed on mac as zsh is default
   - enlarge text size - via preferences
   - `export PS1='$ '`
   - `export PROMPT_COMMAND="history 1 >> ~/Dropbox/UnixHistory.txt"`
   - Turn off the text coloring in terminal (`Terminal -> Preferences -> ANSI`)
-
-- students check software installation: Unix, git (with XCode)
-
-- Get the etherpad link
-- Have ppl `git clone` if they know `git`
+  - students check software installation: `Unix`, git for windows
+- Etherpad link: https://pad.carpentries.org/2021-ucla-spring-unix
+- Get data for workshop: <http://swcarpentry.github.io/shell-novice/data/data-shell.zip>
+- Unzip and put on desktop
 
 ## Checklist for class:
 
-- review of pre-class survey
 - mixed audience, both novice/experienced and disciplines
 - if material is review for you, help by keeping notes on etherpad and helping your neighbor
 - scientific computing has a long history of being self taught, so most instructors even learn something new
 
 ## Setup
 
-- Most tasks in the shell can be done with mouse on Desktop. Why do anything differently?
+- Most tasks in the shell can be done with mouse on Desktop. **Why do anything differently?**
 - **Motivation**
-- Unix = old school system, created before most in this room were born
-- Combining powerful tools together using minimal keystrokes
-- Automating repetitive tasks: moving files
-- Required to use high performance computing systems, supercomputers, cloud computing
-- Terms: file, directory/folder
+- Unix == created before most in this class were born
+- A way to combine powerful tools together using minimal keystrokes
+- Let's us automating repetitive tasks: moving & processing files/data, run our research analysis, build applications 
+- Often required to use in high performance computing & cloud computing
+- Might be good for brief exercise in etherpad: jargon around command line, bash, etc.? 
 
 ## Get data
 - <http://swcarpentry.github.io/shell-novice/shell-novice-data.zip>, move to Desktop, double click to unzip (if not already done)
@@ -59,40 +57,41 @@ author: Tim Dennis
 
 ### how it works -- the Read Evaluate Print Loop (REPL):
 
-  - you type something - LOOP
-  - computer reads it - READ
-  - executes command - EVAL
-  - prints output - PRINT
-  - use **command shell** to make this happen: this is the interface between user and computer
+1. you type something - LOOP
+2. computer reads it - READ
+3. executes command - EVAL
+4. prints output - PRINT
 
-- bash: Bourne again shell, most commonly used, default on most modern implementations
+* We use **command shell** to make this happen: this is the interface between user and computer
+* bash: Bourne again shell, most commonly used, default on most modern implementations
+* zsh - a variant of bash, now default on mac, for us today bash and zsh are interchangable 
 
-- example data:
+## Scenario set up for lesson (optional)
+NOTE: I often skip this
 
-  - our friend Nelle has six months worth of survey data collected from the North Pacific
-  - 300 samples of **goo**
-  - Her pipeline:
+- Our friend Nelle has six months worth of survey data collected from the North Pacific
+- 300 samples of **goo**
+- Her pipeline:
 
-    1. Determine the abundance of 300 proteins
-    2. Each sample has one output file with one line for each protein
-    3. calculate statistics for each protein separately using program `goostat`
-    4. compare statistics for proteins using program called `goodiff`
-    5. write up results and submit by end of month
+1. Determine the abundance of 300 proteins
+2. Each sample has one output file with one line for each protein
+3. calculate statistics for each protein separately using program `goostat`
+4. compare statistics for proteins using program called `goodiff`
+5. write up results and submit by end of month
 
-  - if she enters all commands by hand, will need to do **45,150 times**.
-  - What can she do instead?
-- Key terms in Etherpad/Whiteboard
-- _Shell_
-- _CLI_ & _GUI_
-- Benefits of the CLI
-  - Automate repetitive tasks (**30 minutes** vs. **2 weeks**)
-  - Prevent user error, manual error
-  - Processing pipelnes are re-usable and sharable
-- _REPL_ Read-Evaluate-Print-Loop
+- If she enters all commands by hand, will need to do **45,150 times**.
+- What can she do instead? Use the command line
+
+### Benefits of the CLI:
+- Automate repetitive tasks (**30 minutes** vs. **2 weeks**)
+- Prevent user error, manual error
+- Processing pipelnes are re-usable and sharable
+- _REPL_ Read-Evaluate-Print-Loop, let's you interactively work things out
 
 ## Files and Directories
 
 **Objectives:** paths, learn basic commands for working with files and directories, learn syntax of commands, tab-completion
+
 - prompt: `$` indicates computer is ready to accept commands
 
 ```bash
@@ -105,18 +104,21 @@ This command:
 2. runs program
 3. displays program's output
 4. displays new prompt
-5. `pwd` print working directory, in this case it is also the home directory
+
+* let's see where we are in our file system
 
 ```bash
 pwd
 ```
 
-Look at directory structure image
+* `pwd` stands for print working directory, in this case it is also the home directory
+* note that the home directory will look different on different OS's
+* To understand "home directory" let's look at an image 
 
 ![Directory structure](http://swcarpentry.github.io/shell-novice/fig/filesystem.svg)
 
 - root directory: holds everything else, begins with slash `/`
-- structure of directories: nested
+- structure of directories are below  that in a tree type structure 
 - slashes `\` can also be a separator between names
 - `ls` listing, prints names of files and directories in current directory and prints in alphabetical order
 
@@ -124,13 +126,13 @@ Look at directory structure image
 ls
 ```
 
-- make the output more comprehensible bny using the **flag**`-F`
+- make the output more comprehensible by using the **flag**`-F`
 
 ```bash
 ls -F
 ```
 
-- adds trailing / to names of directories
+- `-F` adds trailing / to names of directories (note: on git for bash there's )
 - spaces and capitalization in commands are important!
 - `-F` is an **option, argument, or flag**
 - `ls` has lots of other options. Let's find out what they are by:
@@ -139,20 +141,20 @@ ls -F
 ls --help
 ```
 
-- many bash commands and programs support a `--help` flag to display more information
-- for more information on how to usr `ls` type `man ls` (caveat WINDOWS users)
-- `man` is for manual and prints the description of a command and options
-- Git for Windows doesn't come with the `man` files, instead do a web search for `unix man page COMMAND`
-- to navigate `man` files use the up and down arrows, or space bar and b for paging, to quit `q`
+* many bash commands and programs support a `--help` flag to display more information
+* for even more detailed information on how to usr `ls` type `man ls` (caveat WINDOWS users)
+* `man` is for manual and prints the description of a command and options
+* Git for Windows doesn't come with the `man` files, instead do a web search for `unix man page COMMAND`
+* to navigate `man` files use the up and down arrows, or space bar and b for paging, to quit `q`
+
+
 - We can also `ls` to see contents of another directory:
 
 ```bash
 ls -F Desktop
 ```
 
-- we `ls -F` (??) to the Desktop from out home dir and we see a 'data-shell/' folder
-- using a bash shell is strongly dependent on the idea that your files are organized in an hierarchical file system
-- why? use
+- we `ls -F` to the Desktop from our home directory and we see the `data-shell/` folder we unziped there earlier
 - let's look inside `data-shell`
 
 ```bash
@@ -160,9 +162,13 @@ ls -F Desktop/data-shell
 ```
 
 - Let's change directories into that folder
+- What do you think the command is for changing directories?
+    - Yes, `cd`
 
 ```bash
-cd Desktop/data-shell
+cd Desktop
+cd data-shell
+cd data
 ```
 
 - see where we are:
@@ -175,29 +181,40 @@ pwd
 ls -F
 ```
 
-- we can go down the directory structure, how do we go up?
+- We can go down the directory structure, how do we go up?
+- We might try:
 
 ```bash
 cd data-shell
 ```
 
-- doesn't work, but there are different ways to see directories above your pwd
+- `data-shell` is a level above our current location, but we can go up a level this way
+- but there are different ways to navigate to directories above your current `pwd`
 
 ```bash
 cd ..
 ```
 
-- goes up one level in file hierarchy
+- `..` goes up one level in file hierarchy
 - `..` is special directory name meaning "the dir containing this one" (parent)
-- can also use absolute paths
+- let's confirm it worked: 
 
 ```bash
 pwd
 ```
 
-- `ls -F -a` to see hidden files, including `.` and `..`
+- `..` won't show up using `ls` by itself
+- but we can do this to see hidden files:
+
+```bash=hiddenfiles
+ls -F -a
+```
+
+- `-a` shows hidden files, including `.` and `..`
 - `-a` stands for show all
-- `.` is for current directory.
+- `.` is for current directory, this can be useful if you want to reference your current location in the file system
+
+* What happens if we type `cd` by itself? go ahead and do this and type in the chat what it does
 
 ```bash
 cd
@@ -205,7 +222,7 @@ cd
 
 - by itself will return you to your `home` directory
 - `pwd`
-- how do we get back to data
+- how do we get back to our `data` folder?
 
 ```bash
 cd Desktop/data-shell/data
@@ -213,7 +230,7 @@ cd Desktop/data-shell/data
 
 - we can string together a list of directories at once
 - so far we have been using **relative paths** paths starting from our current directory
-- we can also use **absolute paths** in ls and cd, use `pwd`
+- we can also use **absolute paths** in `ls` and `cd`
 
 ```bash
 cd /Users/nelle/Desktop/data-shell
@@ -224,15 +241,9 @@ pwd
 ```
 
 - two more short cuts: `~` and `-`
-- file organization:
-  - `ls north-pacific-gyre/2012-07-03/`
-  - tab completion
-- challenges: open <http://swcarpentry.github.io/shell-novice/02-filedir/#absolute-vs-relative-paths>
-- _prompt_
-- _pwd_, _ls_, _cd_
-- _File systems_
+- challenges: open: <http://swcarpentry.github.io/shell-novice/02-filedir/#absolute-vs-relative-paths>
 
-# CREATING THINGS
+## Working With Files and Directories
 
 **Objectives:** create directory hierarchy that matches given diagram, create files, look in folders, delete folders
 
@@ -253,29 +264,28 @@ mkdir thesis
 
 **good names for directories:**
 
-- is the comment in shell
-- don't use whitespaces - whitespaces used to break arguments on CLI, avoid, use `-` or `_` **snail style**
-- don't begin with `-`
-- commands treat names starting with `-` as options
-- stay with letters, numbers , ., - and _
+- don't use whitespaces - whitespaces break arguments on CLI unless quoted, avoid, use `-` or `_` (or combination)
+- don't start a name with `-`
+    - commands treat names starting with `-` as options
+- stay with letters, numbers, `-` and `_`
 - if you need to refer to names of files or directories that have whitespaces, quote them
 
-```bash
+```bash=changethesis
+cd thesis
 ls -F
 ```
 
-- nothing there yet
+- nothing inside our new dir yet
 - let's change directory to inside the `thesis` and create a file called `draft.txt`
 
-```bash
+```bash=create_draft
 nano draft.txt
 ```
+![](http://swcarpentry.github.io/shell-novice/fig/nano-screenshot.png)
 
-- FOR windows peeps: if you installed the SWC windows installer, it should have installed 'nano', but if not used notepad or notepad++ (NO Word or wordpad)
-- NANO
-- creates file, opens text editor
+- Creates file, opens text editor
 - Editors are like cars -- everyone wants to customize them, so there are hundreds if not thousands of different models
-- write text
+- Write some text
 - use `Control+O` to save file shorthand is `^O`)
 - `Control+X` to exit
 - I don't like this draft, let's remove it:
@@ -288,21 +298,25 @@ ls
 
 - where does file go? Can i get it back?
 - Gone Pecan!
-- Deleting is forever!
-- recreate file then move up one directory
+- **Deleting is forever!**
+- Let's recreate the file then move up one directory
 
 ```bash
 nano draft.txt
 cd ..
 ```
 
-- now let's try and remove a directory
-- removing a directory:
-- `rm thesis`: error
-- `rmdir thesis`: still get error
-- `rm thesis/draft.txt`
-- `rmdir thesis`
-- could've also used `rm -r thesis`, but that can be dangerous!
+* now let's try and remove a directory
+* removing a directory:
+
+```bash=remove
+rm thesis # error
+rmdir thesis # still get error
+rm thesis/draft.txt
+rmdir thesis
+```
+
+* could've also used `rm -r thesis`, but that can be dangerous!
 
 - Let's recreate thesis and draft.
 
@@ -322,9 +336,9 @@ mv thesis/draft.txt thesis/quotes.txt
 ls thesis
 ```
 
-- first part of mv is what you want to move, second is to where and including the new name
+- first part of `mv` is what you want to move, second is to where and including the new name
 - **note**: `mv` works on directories as well
-- let's move quotes into the current directory: remember the `.`
+- let's move `quotes` into the current directory. What does `.` mean? 
 
 ```bash
 mv thesis/quotes.txt .
@@ -334,7 +348,7 @@ mv thesis/quotes.txt .
 ls thesis
 ```
 
-- ls `<filename>` will only list that file, let's see that our file is there
+- `ls <filename>` will only list that file, let's see that our file is there
 
 ```bash
 ls quotes.txt
@@ -360,12 +374,12 @@ ls quotes.txt thesis/quotations.txt
 - challenges: open <http://swcarpentry.github.io/shell-novice/03-create/#renaming-files>
 - _mkdir_
 - _nano_ _(editor)_
-- _rm_, _rmdir
+- _rm_, _rmdir_
 - _mv_, _cp_
 
 ## Pipes and Filters
 
-sro **Objectives:** redirect command output to file, construct pipelines
+**Objectives:** redirect command output to file, construct pipelines
 
 - now we can move around and create things, let's see how we can combine existing programs in new ways
 - Let's got into the molecules directory
@@ -378,58 +392,71 @@ ls molecules
 cd molecules
 ```
 
-- the `*.pdb` format indicates these are Protein Data Bank files
-- let's use the `wc` command -- stands for word count, but also counts lines and characters
+- the `.pdb` format indicates these are [Protein Data Bank](https://en.wikipedia.org/wiki/Protein_Data_Bank) files
+- Let’s run an example command `wc` on cubane.pdb:
 
 ```bash
 wc *.pdb
 ```
 
+- we haven't covered the `*` yet. It is a wild card operator
 - the `*` matches zero or more characters, so the shell turns `*.pdb` into a list of all `.pdb` files
 - word count: lines, words, characters
-- `*` is a wildcard, it matches anything (zero or more characters, there are others)
 
-**wc and flags**
+### wc and flags
 
 ```bash
 wc -l *.pdb
 ```
 
 - only report number of lines
-- what if we do this?
+- what if we do this? what do you think will happen?
 
 ```bash
 wc -l *.pdb > lengths.txt
 ```
 
 - this will send output (redirect it) to new file named lengths.txt
-- but let's confirm that it worked by using a new command `cat` - let's us look inside the file, stands for concatenate
+- but let's confirm that it worked by using a new command `cat` - let's us look inside the file
+- `cat` stands for concatenate
 
 ```bash
-ls lengths.txt
 cat lengths.txt
 ```
 
-- NOtE: `>` will overwrite previous file
-- what does `>>` do?
-- Try it and run cat
-- can't remember how wc reports? use `man wc` (`q` to exit), `wc -h`, or `wc –help` (this should work for most unix commands), also google man wc
+- can't remember how wc reports? use `man wc` (`q` to exit), `wc -h`, or `wc –help` (this should work for most unix commands), also google `unix man wc`
+
+### Sorting 
+
 - now let's use the `sort` command to sort the contents of our file
+- let's look at some options for `sort`
+
+```bash=mansort
+man sort
+sort --help
+```
+
 - we will use the `-n` flag to tell sort to sort by numerical rather than alpha
 
 ```bash
 sort -n lengths.txt
 ```
+compare to: 
+
+```bash=sort
+sort lengths.txt
+```
 
 - sort by first column, using numerical order
 - does not change file, just prints output to screen
-- if we want to do that use;
+- if we want to save results, what can we use? 
+- yes, we use our rediretion operator `>` to save to file
 
 ```bash
 sort -n lengths.txt > sorted-lengths.txt
 ```
 
-- arrow up to recall last command
+- arrow up to recall last few commands
 - let's use head to see the biggest:
 
 ```bash
@@ -439,7 +466,7 @@ head -1 sorted-lengths.txt
 - final result: which one file is shortest?
 
 ```bash
-sort -n lengths.txt | head -l
+sort -n lengths.txt | head -1
 ```
 
 - **vertical bar** is a pipe, which sends output of command on left as input to command on right

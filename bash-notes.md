@@ -8,39 +8,29 @@ author: Tim Dennis
 
 [![hackmd-github-sync-badge](https://hackmd.io/5oziF2v5TuiTcS1I3kCe3Q/badge)](https://hackmd.io/5oziF2v5TuiTcS1I3kCe3Q)
 
+## Before class: Instructor
 
-## Before class:
-
-- set up shell:
-  - `exec bash` - switches to bash from zsh
-      - no longer needed on mac as zsh is default
-  - enlarge text size - via preferences
-  - `export PS1='$ '`
-  - `export PROMPT_COMMAND="history 1 >> ~/Dropbox/UnixHistory.txt"`
-  - Turn off the text coloring in terminal (`Terminal -> Preferences -> ANSI`)
-  - students check software installation: `Unix`, git for windows
+### set up shell:
+- `exec bash` - switches to bash from zsh
+  - no longer needed on mac as zsh is default, so won't be as disorienting to learners
+- enlarge text size - via preferences
+- `export PS1='$ '` - changes command promp to `$` 
+- `export PROMPT_COMMAND="history 1 >> ~/Dropbox/UnixHistory.txt"` 
+- Turn off the text coloring in terminal (`Terminal -> Preferences -> ANSI`)
+  - alternately, use a different user account on your Mac so you don't pick up themed or supped up CLI's 
+- have students check software installation: `Unix`, git for windows, ask when student come in
 - Etherpad link: https://pad.carpentries.org/2021-ucla-spring-unix
 - Get data for workshop: <http://swcarpentry.github.io/shell-novice/data/data-shell.zip>
 - Unzip and put on desktop
 
-## Checklist for class:
-
-- mixed audience, both novice/experienced and disciplines
-- if material is review for you, help by keeping notes on etherpad and helping your neighbor
-- scientific computing has a long history of being self taught, so most instructors even learn something new
-
-## Setup
+## Setup/Motivation/Why Use?
 
 - Most tasks in the shell can be done with mouse on Desktop. **Why do anything differently?**
-- **Motivation**
-- Unix == created before most in this class were born
 - A way to combine powerful tools together using minimal keystrokes
-- Let's us automating repetitive tasks: moving & processing files/data, run our research analysis, build applications 
-- Often required to use in high performance computing & cloud computing
+- Let's us automate repetitive tasks: moving & processing files/data, run our research analysis, build applications 
+- Install software & other third party tools, configure software & tools
+- Often required to use with remote machines: high performance computing (HPC), cloud computing, web servers
 - Might be good for brief exercise in etherpad: jargon around command line, bash, etc.? 
-
-## Get data
-- <http://swcarpentry.github.io/shell-novice/shell-novice-data.zip>, move to Desktop, double click to unzip (if not already done)
 
 ## Introducing the Shell
 
@@ -69,7 +59,7 @@ author: Tim Dennis
 * bash: Bourne again shell, most commonly used, default on most modern implementations
 * zsh - a variant of bash, now default on mac, for us today bash and zsh are interchangable 
 
-## Scenario set up for lesson (optional)
+### Scenario set up for lesson (skip this)
 NOTE: I often skip this
 
 - Our friend Nelle has six months worth of survey data collected from the North Pacific
@@ -135,7 +125,7 @@ ls
 ls -F
 ```
 
-- `-F` adds trailing / to names of directories (note: on git for bash there's )
+- `-F` adds trailing / to names of directories (note: on Windows git bash there's syntax highlighting for directories )
 - spaces and capitalization in commands are important!
 - `-F` is an **option, argument, or flag**
 - `ls` has lots of other options. Let's find out what they are by:
@@ -318,8 +308,8 @@ rmdir thesis # still get error
 rm thesis/draft.txt
 rmdir thesis
 ```
-
-* could've also used `rm -r thesis`, but that can be dangerous!
+* unix won't let us delete a directory with something inside of it as a precaution
+* we could have also used `rm -r thesis`, but that can be dangerous!
 
 - Let's recreate thesis and draft.
 
@@ -341,7 +331,7 @@ ls thesis
 
 - first part of `mv` is what you want to move, second is to where and including the new name
 - **note**: `mv` works on directories as well
-- let's move `quotes` into the current directory. What does `.` mean? 
+- let's move `quotes` into the current directory. What does `.` mean again? 
 
 ```bash
 mv thesis/quotes.txt .
@@ -385,7 +375,11 @@ ls quotes.txt thesis/quotations.txt
 **Objectives:** redirect command output to file, construct pipelines
 
 - now we can move around and create things, let's see how we can combine existing programs in new ways
-- Let's got into the molecules directory
+- Let's go into the molecules directory
+
+```bash=pwdmol
+pwd
+```
 
 ```bash
 ls molecules
@@ -408,12 +402,15 @@ wc *.pdb
 
 ### wc and flags
 
+* let's only look at the number of lines
+* what flag do you think will produce this?
+
 ```bash
 wc -l *.pdb
 ```
 
 - only report number of lines
-- what if we do this? what do you think will happen?
+- what if we run this? what do you think will happen?
 
 ```bash
 wc -l *.pdb > lengths.txt
@@ -427,7 +424,7 @@ wc -l *.pdb > lengths.txt
 cat lengths.txt
 ```
 
-- can't remember how wc reports? use `man wc` (`q` to exit), `wc -h`, or `wc –help` (this should work for most unix commands), also google `unix man wc`
+- can't remember how wc reports? use `man wc` (`q` to exit), `wc -h`, or `wc –help` (this should work for most unix commands), also web search `unix man wc`
 
 ### Sorting 
 
@@ -444,7 +441,7 @@ sort --help
 ```bash
 sort -n lengths.txt
 ```
-compare to: 
+* compare to: 
 
 ```bash=sort
 sort lengths.txt
@@ -468,14 +465,14 @@ head -1 sorted-lengths.txt
 
 ### Piping 
 
-- Saving intermediate files like `sorted-lengths.txt` can get messy and confusing
+- Saving intermediate files like `sorted-lengths.txt` can get messy and confusing, hard to track
 - We can make it easier to understand by combining these commands together
 
 ```bash=pipe
 sort -n lengths.txt | head -n 1
 ```
 
-- **vertical bar** is the pipe in unix 
+- **vertical bar** is called the pipe in unix 
 - it sends output of command on left as input to command on right
 - `head` prints specified number of lines from top of file
 - we can chain multiple commands together 
@@ -491,10 +488,10 @@ $ wc -l *.pdb | sort -n | head -n 1
 ```
 
 * this pipe and filter programming model is important conceptually
-- note: you only enter the original files once!
-- let's review what we covered via this image: 
-
+* let's review what we covered via this image: 
 ![](http://swcarpentry.github.io/shell-novice/fig/redirects-and-pipes.svg)
+
+- note: you only enter the original files once!
 
 
 ### Nelle's pipeline (skip for time):
@@ -575,8 +572,15 @@ for filename in *.dat
 ```
 
 - use of wildcard. what does echo do? why is this useful for loops?
-- write a for loop to resolve the original problem of creating a backup (copy of original data)
+
+```bash=echo
+echo Hey you
+```
 - strategy: `echo` command before running to make sure the loop is functioning the way you expect
+
+### Solving the original problem
+
+- write a for loop to resolve the original problem of creating a backup (copy of original data)
 - going back to the original file copying problem, we can solve this with the following loop:
 
 ```bash
@@ -585,6 +589,8 @@ do
   cp $filename original-$filename
 done
 ```
+
+
 ### Nelle's example (skip for time contraints)
 
 - nelle's example:
@@ -617,10 +623,9 @@ for datafile in *[AB].txt; do; echo $datafile stats-$datafile; done
 ```
 for datafile in *[AB].txt; do; echo $datafile; goostats $datafile stats-$datafile; done
 ```
-
 - tab completion: move to start of line using `^A` and end of line `^E` (option with arrows to move by one word)
 - `history`: see old commands, find line number (repeat using !number)
-- Socrative questions 7 and 8
+
 
 ## Shell Scripts
 
@@ -630,7 +635,7 @@ for datafile in *[AB].txt; do; echo $datafile; goostats $datafile stats-$datafil
 - create file called `middle.sh` and add this command: `head -15 octane.pdb | tail -5`
 - `bash middle.sh`
 - `.sh` means it's a shell script
-- very important to make these in a text editor, rather than in word!
+- very important to make these in a text editor, rather than in Word!
 - edit `middle.sh` and replace file name with `"$1"`
 - quotations accommodates spaces in filenames
 - `bash middle.sh octane.pdb`, should get same output
@@ -639,18 +644,21 @@ for datafile in *[AB].txt; do; echo $datafile; goostats $datafile stats-$datafil
 - `bash middle.sh pentane.pdb -20 -5`
 - to remember what you've done, and allow for other people to use: add comments to top of file
 
+
 ```bash
 #select lines from middle of a file
 #usage: middle.sh filename -end_line -num_lines
 ```
 
 - explain comments
+- how would we use the `for` loop? 
 
-  - what if we wanted to operate on many files? create new file: `sorted.sh`
-  - `wc -l “$@” | sort -n`
-  - `bash sorted.sh *.pdb ../creatures/*.dat`
-  - add comment!
-  - save last few lines of history to file to remember how to do work again later:
+- what if we wanted to operate on many files? create new file: `sorted.sh`
+- `wc -l “$@” | sort -n`
+  - unix special parameters 
+- `bash sorted.sh *.pdb ../creatures/*.dat`
+- add comment!
+- save last few lines of history to file to remember how to do work again later:
 
 - `history | tail -4 > redo-figure.sh`
 

@@ -374,6 +374,8 @@ ls quotes.txt thesis/quotations.txt
 
 **Objectives:** redirect command output to file, construct pipelines
 
+data: http://swcarpentry.github.io/shell-novice/data/data-shell.zip
+
 - now we can move around and create things, let's see how we can combine existing programs in new ways
 - Let's go into the molecules directory
 
